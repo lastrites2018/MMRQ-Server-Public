@@ -1,0 +1,13 @@
+{
+  "missingposts": [
+    { "id": 1, "title": "개를 잃어버렸어요", "text" : "", "writer": "김미애", "userid" : "testid1", "location" : "", 
+    "handphone" : "01012345678", "email" : "test@test.com", "petkinds" : "dog", "petsex" : "male", "petage" : 10, "petname" : "myong", "missingdate" : 20181020, "missinglocation" : "seoul", "traits" : "사람만 지나가면 짖음" }
+  ],
+  "findposts": [
+    { "id": 1, "title": "개를 찾았어요", "text" : "길가다 주움", "writer": "발견왕", "userid" : "testid2", "location" : "", 
+      "handphone" : "01012345678", "email" : "test2@test2.com", "petkinds" : "dog", "petsex" : "female", "petage" : "알수없음", "petname" : "알수없음", "getdate" : 20181023, "getlocation" : "seoul", "traits" : "물은 잘 안 마심" }
+  ],
+  "users": [{ "id": 1, "userid" : "testid1", "password" : "imhashed", "name": "김미애", "handphone" : "01012345678", "email" : "test@test.com" },
+    { "id": 2, "userid" : "testid2", "password" : "imhashedtoo", "name": "발견왕", "handphone" : "01012345678", "email" : "test@test.com" }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "name": "server-mmrq",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codestates/server-mmrq.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/codestates/server-mmrq/issues"
+  },
+  "homepage": "https://github.com/codestates/server-mmrq#readme",
+  "devDependencies": {
+    "json-server": "^0.14.0"
+  }
+}
