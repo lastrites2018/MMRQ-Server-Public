@@ -29,5 +29,6 @@ http://webframeworks.kr/tutorials/weplanet/How%20to%20Use%20json-server%20to%20C
 ## 주의사항
 json-server를 사용하는데 분명한 한계점들이 있습니다. 이러한 한계점은 다음과 같습니다.
 
-텍스트 데이터와 관련된프로토타입을 만들 때만 사용할 수 있습니다.
+텍스트 데이터와 관련된 프로토타입을 만들 때만 사용할 수 있습니다.
+
 인증을 기반으로 API 영역에 한계를 설정할 수 없습니다.
