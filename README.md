@@ -1,8 +1,9 @@
-##. 설치방법
-`npm i -g json-server`
-로 json-server 글로벌 설치!
+## 설치방법
 
-##. 설치 후에
+`npm i -g json-server`로 json-server 글로벌 설치!
+
+## 설치 후에
+
 json-server가 db.json 파일을 watching 하도록 아래와 같이 실행한다. 
 
 ## 기본 포트(3000) 사용
@@ -31,8 +32,8 @@ http://localhost:3000
 삭제(DELETE) : http://localhost:3000/users/1
 추가, 수정의 경우 body에 json 값이 들어가야 합니다.(ip주소를 이용할 수 있습니다.)
 
+## 참조 
 
-##. 참조 
 안 봐도 상관없지만 혹시 json에 대한 공부가 필요하다면?
 
 POST로 보내서 데이터를 추가하거나, 삭제, 수정 하는 등의 방법이 나와있습니다.
@@ -44,8 +45,7 @@ http://webframeworks.kr/tutorials/weplanet/How%20to%20Use%20json-server%20to%20C
 
 http://webframeworks.kr/tutorials/weplanet/How%20to%20Use%20json-server%20to%20Create%20Mock%20APIs2/ JSON은 검색도 가능합니다! 여기서 적용할 수 있어요.
 
-
-##. JSON-SERVER의 한계점
+## JSON-SERVER의 한계점
 
 json-server를 사용하는데 분명한 한계점들이 있습니다. 이러한 한계점은 다음과 같습니다.
 
