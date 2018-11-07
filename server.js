@@ -2,16 +2,15 @@ const fs = require('fs');
 const bodyParser = require('body-parser');
 const jsonServer = require('json-server');
 const jwt = require('jsonwebtoken');
-
-var cors = require('cors');
+// var cors = require('cors');
 // var express = require('express');
 // var app = express();
 
 const server = jsonServer.create();
-const middlewares = jsonServer.defaults();
+// const middlewares = jsonServer.defaults();
 // Set default middlewares (logger, static, cors and no-cache)
 server.use(cors());
-server.use(middlewares);
+// server.use(middlewares);
 const router = jsonServer.router('./db.json');
 const userdb = JSON.parse(fs.readFileSync('./db.json', 'UTF-8'));
 
@@ -40,6 +39,7 @@ let isAuthenticated = ({ email, password }) => {
 };
 
 server.get('/users', (req, res) => {
+  res.writeHead(200, { 'Access-Control-Allow-Origin': '*' });
   if (
     req.headers.authorization === undefined ||
     req.headers.authorization.split(' ')[0] !== 'Bearer'
@@ -178,6 +178,7 @@ server.get('/auth/check', (req, res) => {
 });
 
 server.post('/auth/login', (req, res) => {
+  res.writeHead(200, { 'Access-Control-Allow-Origin': '*' });
   const { email, password } = req.body;
   // console.log('rq', req.body);
   let userIndex = isAuthenticated({ email, password });
@@ -199,7 +200,7 @@ server.post('/auth/login', (req, res) => {
 
 server.use(/^(?!\/auth|\/find|\/witness|\/users).*$/, (req, res, next) => {
   // console.log('req', req);
-
+  res.writeHead(200, { 'Access-Control-Allow-Origin': '*' });
   if (
     req.headers.authorization === undefined ||
     req.headers.authorization.split(' ')[0] !== 'Bearer'
