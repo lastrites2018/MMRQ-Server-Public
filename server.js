@@ -39,44 +39,44 @@ let isAuthenticated = ({ email, password }) => {
   );
 };
 
-server.get('/users', (req, res) => {
-  let cookie;
-  let element;
-  if (!req.headers.cookie) {
-    return;
-  }
+// server.get('/users', (req, res) => {
+//   let cookie;
+//   let element;
+//   if (!req.headers.cookie) {
+//     return;
+//   }
 
-  if (req.headers.cookie.includes(';')) {
-    cookie = req.headers.cookie.split(';').map(function(element) {
-      element = element.split('=');
-      return {
-        key: element[0],
-        value: element[1]
-      };
-    });
-  } else {
-    element = element.split('=');
-    cookie = {
-      key: element[0],
-      value: element[1]
-    };
-  }
+//   if (req.headers.cookie.includes(';')) {
+//     cookie = req.headers.cookie.split(';').map(function(element) {
+//       element = element.split('=');
+//       return {
+//         key: element[0],
+//         value: element[1]
+//       };
+//     });
+//   } else {
+//     element = element.split('=');
+//     cookie = {
+//       key: element[0],
+//       value: element[1]
+//     };
+//   }
 
-  for (let i = 0; i < cookie.length; i++) {
-    if (cookie[i].key === 'token' || cookie[i].key === ' token') {
-      decode = verifyToken(cookie[i].value);
-    }
-  }
+//   for (let i = 0; i < cookie.length; i++) {
+//     if (cookie[i].key === 'token' || cookie[i].key === ' token') {
+//       decode = verifyToken(cookie[i].value);
+//     }
+//   }
 
-  if (decode.email !== 'admin@admin.com') {
-    const status = 401;
-    const message = '권한 없이 유저 목록을 볼 수 없습니다.';
-    res.status(status).json({ status, message });
-    return;
-  } else {
-    next();
-  }
-});
+//   if (decode.email !== 'admin@admin.com') {
+//     const status = 401;
+//     const message = '권한 없이 유저 목록을 볼 수 없습니다.';
+//     res.status(status).json({ status, message });
+//     return;
+//   } else {
+//     next();
+//   }
+// });
 
 server.get('/auth/decode', (req, res) => {
   let decode = false;
