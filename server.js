@@ -10,6 +10,7 @@ var cors = require('cors');
 const server = jsonServer.create();
 const middlewares = jsonServer.defaults();
 // Set default middlewares (logger, static, cors and no-cache)
+server.use(cors());
 server.use(middlewares);
 const router = jsonServer.router('./db.json');
 const userdb = JSON.parse(fs.readFileSync('./db.json', 'UTF-8'));
@@ -17,7 +18,6 @@ const userdb = JSON.parse(fs.readFileSync('./db.json', 'UTF-8'));
 server.use(bodyParser.urlencoded({ extended: true }));
 server.use(bodyParser.json());
 // server.use(jsonServer.defaults());
-// server.use(cors());
 
 const SECRET_KEY = '123456789';
 const expiresIn = '1h';
