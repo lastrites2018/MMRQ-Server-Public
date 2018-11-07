@@ -39,28 +39,32 @@ let isAuthenticated = ({ email, password }) => {
   );
 };
 
-// server.get('/users', (req, res) => {
-//   if (
-//     req.headers.authorization === undefined ||
-//     req.headers.authorization.split(' ')[0] !== 'Bearer'
-//   ) {
-//     const status = 401;
-//     const message = 'Error in authorization format';
-//     res.status(status).json({ status, message });
-//     return;
-//   }
-//   try {
-//     console.log('검증용', req.headers.authorization.split(' ')[1]);
-//     verifyToken(req.headers.authorization.split(' ')[1]);
-//     const status = 201;
-//     res.status(status).json({ status, decode });
-//     return;
-//   } catch (err) {
-//     const status = 401;
-//     const message = 'Error access_token is revoked';
-//     res.status(status).json({ status, message });
-//   }
-// });
+server.get('/users', (req, res) => {
+  if (
+    req.headers.authorization === undefined ||
+    req.headers.authorization.split(' ')[0] !== 'Bearer'
+  ) {
+    const status = 401;
+    const message = 'Error in authorization format';
+    res.status(status).json({ status, message });
+    return;
+  }
+  try {
+    console.log('검증용', req.headers.authorization.split(' ')[1]);
+    var decode = verifyToken(req.headers.authorization.split(' ')[1]);
+    const status = 201;
+    if (decode.email) {
+      console.log('decode-email 존재한다!');
+      res.status(status).json({ status, userdb });
+      return;
+    }
+    next();
+  } catch (err) {
+    const status = 401;
+    const message = 'Error access_token is revoked';
+    res.status(status).json({ status, message });
+  }
+});
 
 // server.get('/users', (req, res) => {
 //   let cookie;
