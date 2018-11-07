@@ -40,14 +40,28 @@ let isAuthenticated = ({ email, password }) => {
 };
 
 server.get('/users', (req, res) => {
-  let decode = false;
-  var cookie = req.headers.cookie.split(';').map(function(element) {
-    var element = element.split('=');
-    return {
+  let cookie;
+  let element;
+  if (!req.headers.cookie) {
+    return;
+  }
+
+  if (req.headers.cookie.includes(';')) {
+    cookie = req.headers.cookie.split(';').map(function(element) {
+      element = element.split('=');
+      return {
+        key: element[0],
+        value: element[1]
+      };
+    });
+  } else {
+    element = element.split('=');
+    cookie = {
       key: element[0],
       value: element[1]
     };
-  });
+  }
+
   for (let i = 0; i < cookie.length; i++) {
     if (cookie[i].key === 'token' || cookie[i].key === ' token') {
       decode = verifyToken(cookie[i].value);
@@ -66,13 +80,27 @@ server.get('/users', (req, res) => {
 
 server.get('/auth/decode', (req, res) => {
   let decode = false;
-  var cookie = req.headers.cookie.split(';').map(function(element) {
-    var element = element.split('=');
-    return {
+  let cookie;
+  let element;
+  if (!req.headers.cookie) {
+    return;
+  }
+
+  if (req.headers.cookie.includes(';')) {
+    cookie = req.headers.cookie.split(';').map(function(element) {
+      element = element.split('=');
+      return {
+        key: element[0],
+        value: element[1]
+      };
+    });
+  } else {
+    element = element.split('=');
+    cookie = {
       key: element[0],
       value: element[1]
     };
-  });
+  }
   for (let i = 0; i < cookie.length; i++) {
     if (cookie[i].key === 'token' || cookie[i].key === ' token') {
       decode = verifyToken(cookie[i].value);
