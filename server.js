@@ -3,6 +3,8 @@ const bodyParser = require('body-parser');
 const jsonServer = require('json-server');
 const jwt = require('jsonwebtoken');
 var cors = require('cors');
+// var express = require('express');
+// var app = express();
 
 const server = jsonServer.create();
 const router = jsonServer.router('./db.json');
@@ -10,7 +12,12 @@ const userdb = JSON.parse(fs.readFileSync('./db.json', 'UTF-8'));
 
 server.use(bodyParser.urlencoded({ extended: true }));
 server.use(bodyParser.json());
-server.use(jsonServer.defaults());
+// server.use(jsonServer.defaults());
+// server.use(cors());
+
+const middlewares = jsonServer.defaults();
+// Set default middlewares (logger, static, cors and no-cache)
+server.use(middlewares);
 
 const SECRET_KEY = '123456789';
 const expiresIn = '1h';
@@ -31,8 +38,6 @@ let isAuthenticated = ({ email, password }) => {
     user => user.email === email && user.password === password
   );
 };
-
-server.use(cors());
 
 server.get('/users', (req, res) => {
   let decode = false;
