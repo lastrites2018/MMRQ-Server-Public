@@ -2,7 +2,7 @@ const fs = require('fs');
 const bodyParser = require('body-parser');
 const jsonServer = require('json-server');
 const jwt = require('jsonwebtoken');
-// var cors = require('cors');
+var cors = require('cors');
 // var express = require('express');
 // var app = express();
 
