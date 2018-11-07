@@ -39,44 +39,64 @@ let isAuthenticated = ({ email, password }) => {
   );
 };
 
-server.get('/users', (req, res) => {
-  let cookie;
-  let element;
-  if (!req.headers.cookie) {
-    return;
-  }
+// server.get('/users', (req, res) => {
+//   if (
+//     req.headers.authorization === undefined ||
+//     req.headers.authorization.split(' ')[0] !== 'Bearer'
+//   ) {
+//     const status = 401;
+//     const message = 'Error in authorization format';
+//     res.status(status).json({ status, message });
+//     return;
+//   }
+//   try {
+//     console.log('검증용', req.headers.authorization.split(' ')[1]);
+//     verifyToken(req.headers.authorization.split(' ')[1]);
+//     const status = 201;
+//     res.status(status).json({ status, decode });
+//     return;
+//   } catch (err) {
+//     const status = 401;
+//     const message = 'Error access_token is revoked';
+//     res.status(status).json({ status, message });
+//   }
+// });
 
-  if (req.headers.cookie.includes(';')) {
-    cookie = req.headers.cookie.split(';').map(function(element) {
-      element = element.split('=');
-      return {
-        key: element[0],
-        value: element[1]
-      };
-    });
-  } else {
-    element = element.split('=');
-    cookie = {
-      key: element[0],
-      value: element[1]
-    };
-  }
+// server.get('/users', (req, res) => {
+//   let cookie;
+//   let element;
 
-  for (let i = 0; i < cookie.length; i++) {
-    if (cookie[i].key === 'token' || cookie[i].key === ' token') {
-      decode = verifyToken(cookie[i].value);
-    }
-  }
+//   if (req.headers.cookie.includes(';')) {
+//     cookie = req.headers.cookie.split(';').map(function(element) {
+//       element = element.split('=');
+//       return {
+//         key: element[0],
+//         value: element[1]
+//       };
+//     });
+//   } else {
+//     element = element.split('=');
+//     cookie = {
+//       key: element[0],
+//       value: element[1]
+//     };
+//   }
 
-  if (decode.email !== 'admin@admin.com') {
-    const status = 401;
-    const message = '권한 없이 유저 목록을 볼 수 없습니다.';
-    res.status(status).json({ status, message });
-    return;
-  } else {
-    next();
-  }
-});
+//   for (let i = 0; i < cookie.length; i++) {
+//     if (cookie[i].key === 'token' || cookie[i].key === ' token') {
+//       decode = verifyToken(cookie[i].value);
+//     }
+//   }
+
+//   if (decode.email !== 'test@test.com') {
+//     const status = 401;
+//     const message = '권한 없이 유저 목록을 볼 수 없습니다.';
+//     res.status(status).json({ status, message });
+//     return;
+//   } else {
+//     next();
+//   }
+// });
 
 server.get('/auth/decode', (req, res) => {
   let decode = false;
