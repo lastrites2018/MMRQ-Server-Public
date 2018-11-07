@@ -119,7 +119,7 @@ server.get('/auth/decode', (req, res) => {
 });
 
 server.get('/auth/check', (req, res) => {
-  console.log('auth-check', req.headers.cookie);
+  console.log('auth-check', req.headers);
   // 원래는 헤더에 포함시켜야겠지만...
   // verifyToken(req.headers.cookie.split(' ')[1]);
   let decode = false;
