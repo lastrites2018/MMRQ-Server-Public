@@ -119,17 +119,33 @@ server.get('/auth/decode', (req, res) => {
 });
 
 server.get('/auth/check', (req, res) => {
-  // console.log(req.headers.cookie);
+  console.log('auth-check', req.headers.cookie);
   // 원래는 헤더에 포함시켜야겠지만...
   // verifyToken(req.headers.cookie.split(' ')[1]);
   let decode = false;
-  var cookie = req.headers.cookie.split(';').map(function(element) {
-    var element = element.split('=');
-    return {
+  let cookie;
+  let element;
+
+  if (!req.headers.cookie) {
+    return;
+  }
+
+  if (req.headers.cookie.includes(';')) {
+    cookie = req.headers.cookie.split(';').map(function(element) {
+      element = element.split('=');
+      return {
+        key: element[0],
+        value: element[1]
+      };
+    });
+  } else {
+    element = element.split('=');
+    cookie = {
       key: element[0],
       value: element[1]
     };
-  });
+  }
+
   for (let i = 0; i < cookie.length; i++) {
     if (cookie[i].key === 'token' || cookie[i].key === ' token') {
       decode = verifyToken(cookie[i].value);
