@@ -2,6 +2,7 @@ const fs = require('fs');
 const bodyParser = require('body-parser');
 const jsonServer = require('json-server');
 const jwt = require('jsonwebtoken');
+var cors = require('cors');
 
 const server = jsonServer.create();
 const router = jsonServer.router('./db.json');
@@ -30,6 +31,8 @@ let isAuthenticated = ({ email, password }) => {
     user => user.email === email && user.password === password
   );
 };
+
+server.use(cors());
 
 server.get('/users', (req, res) => {
   let decode = false;
