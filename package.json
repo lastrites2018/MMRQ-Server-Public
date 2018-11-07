@@ -1,23 +1,18 @@
 {
-  "name": "server-mmrq",
+  "name": "json-server-api",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Simple Fake API",
+  "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon server.js",
+    "start-json": "json-server --watch db.json --port 5000",
+    "start-auth": "nodemon server.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/codestates/server-mmrq.git"
-  },
-  "keywords": [],
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/codestates/server-mmrq/issues"
-  },
-  "homepage": "https://github.com/codestates/server-mmrq#readme",
-  "devDependencies": {
-    "json-server": "^0.14.0"
+  "dependencies": {
+    "json-server": "^0.14.0",
+    "jsonwebtoken": "^8.1.0",
+    "nodemon": "^1.18.6"
   }
 }
