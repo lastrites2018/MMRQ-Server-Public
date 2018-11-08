@@ -70,7 +70,8 @@ server.post('/fileupload', upload.array('profile'), function(req, res, next) {
         console.log('err', err);
         console.log('data', data);
         var url = data.Location;
-        console.log('url 반환 !');
+        const status = 201;
+        console.log('file upload 성공url 반환 !');
         res.status(status).json({ status, url });
 
         //어디에서나 브라우저를 통해 접근할 수 있는 파일 URL을 얻었습니다.
