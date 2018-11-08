@@ -39,7 +39,7 @@ let isAuthenticated = ({ email, password }) => {
 };
 
 server.get('/users', (req, res) => {
-  res.writeHead(200, { 'Access-Control-Allow-Origin': '*' });
+  // res.writeHead(200, { 'Access-Control-Allow-Origin': '*' });
   if (
     req.headers.authorization === undefined ||
     req.headers.authorization.split(' ')[0] !== 'Bearer'
@@ -178,7 +178,7 @@ server.get('/auth/check', (req, res) => {
 });
 
 server.post('/auth/login', (req, res) => {
-  res.writeHead(200, { 'Access-Control-Allow-Origin': '*' });
+  // res.writeHead(200, { 'Access-Control-Allow-Origin': '*' });
   const { email, password } = req.body;
   // console.log('rq', req.body);
   let userIndex = isAuthenticated({ email, password });
@@ -200,7 +200,7 @@ server.post('/auth/login', (req, res) => {
 
 server.use(/^(?!\/auth|\/find|\/witness|\/users).*$/, (req, res, next) => {
   // console.log('req', req);
-  res.writeHead(200, { 'Access-Control-Allow-Origin': '*' });
+  // res.writeHead(200, { 'Access-Control-Allow-Origin': '*' });
   if (
     req.headers.authorization === undefined ||
     req.headers.authorization.split(' ')[0] !== 'Bearer'
