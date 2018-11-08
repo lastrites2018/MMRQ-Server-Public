@@ -87,6 +87,7 @@ let createToken = payload => {
 let verifyToken = token => {
   // console.log('token', token);
   return jwt.verify(token, SECRET_KEY, (err, decode) => {
+    console.log('decode', decode);
     return decode !== undefined ? decode : err;
   });
 };
@@ -210,10 +211,7 @@ server.get('/auth/decode', (req, res) => {
 
 server.get('/auth/check', (req, res) => {
   console.log('auth-check', req.headers);
-  let decode = false;
-  let cookie;
-  let element;
-
+  let decode;
   if (
     req.headers.authorization === undefined ||
     req.headers.authorization.split(' ')[0] !== 'Bearer'
@@ -228,8 +226,6 @@ server.get('/auth/check', (req, res) => {
     console.log('auth-check-try', req.headers.authorization.split(' ')[1]);
     decode = verifyToken(req.headers.authorization.split(' ')[1]);
     let userIndex = userdb.users.findIndex(user => {
-      // console.log('user', user);
-      // console.log('user.email', user.email);
       return decode.email === user.email && decode.handphone === user.handphone;
     });
 
