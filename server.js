@@ -50,6 +50,7 @@ server.post('/fileupload', upload.array('profile'), function(req, res, next) {
       accessKeyId: github.accessKeyId,
       secretAccessKey: github.secretAccessKey
     });
+    console.log('github', github);
 
     var s3_params = {
       Bucket: 'mmrq',
@@ -66,8 +67,11 @@ server.post('/fileupload', upload.array('profile'), function(req, res, next) {
       })
       .send(function(err, data) {
         //S3 File URL
-        console.log(data);
-        var url = data.location;
+        console.log('err', err);
+        console.log('data', data);
+        var url = data.Location;
+        console.log('url 반환 !');
+        res.status(status).json({ status, url });
 
         //어디에서나 브라우저를 통해 접근할 수 있는 파일 URL을 얻었습니다.
       });
@@ -251,28 +255,31 @@ server.post('/auth/login', (req, res) => {
   res.status(200).json({ access_token });
 });
 
-server.use(/^(?!\/auth|\/find|\/witness|\/users).*$/, (req, res, next) => {
-  // console.log('req', req);
-  // res.writeHead(200, { 'Access-Control-Allow-Origin': '*' });
-  if (
-    req.headers.authorization === undefined ||
-    req.headers.authorization.split(' ')[0] !== 'Bearer'
-  ) {
-    const status = 401;
-    const message = 'Error in authorization format';
-    res.status(status).json({ status, message });
-    return;
+server.use(
+  /^(?!\/auth|\/find|\/witness|\/users|\/fileupload).*$/,
+  (req, res, next) => {
+    // console.log('req', req);
+    // res.writeHead(200, { 'Access-Control-Allow-Origin': '*' });
+    if (
+      req.headers.authorization === undefined ||
+      req.headers.authorization.split(' ')[0] !== 'Bearer'
+    ) {
+      const status = 401;
+      const message = 'Error in authorization format';
+      res.status(status).json({ status, message });
+      return;
+    }
+    try {
+      console.log('검증용', req.headers.authorization.split(' ')[1]);
+      verifyToken(req.headers.authorization.split(' ')[1]);
+      next();
+    } catch (err) {
+      const status = 401;
+      const message = 'Error access_token is revoked';
+      res.status(status).json({ status, message });
+    }
   }
-  try {
-    console.log('검증용', req.headers.authorization.split(' ')[1]);
-    verifyToken(req.headers.authorization.split(' ')[1]);
-    next();
-  } catch (err) {
-    const status = 401;
-    const message = 'Error access_token is revoked';
-    res.status(status).json({ status, message });
-  }
-});
+);
 
 server.use(router);
 
