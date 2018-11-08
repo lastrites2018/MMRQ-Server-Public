@@ -2,15 +2,15 @@ const fs = require('fs');
 const bodyParser = require('body-parser');
 const jsonServer = require('json-server');
 const jwt = require('jsonwebtoken');
-var cors = require('cors');
+// var cors = require('cors');
 // var express = require('express');
 // var app = express();
 
 const server = jsonServer.create();
-// const middlewares = jsonServer.defaults();
+const middlewares = jsonServer.defaults();
 // Set default middlewares (logger, static, cors and no-cache)
-server.use(cors());
-// server.use(middlewares);
+// server.use(cors());
+server.use(middlewares);
 const router = jsonServer.router('./db.json');
 const userdb = JSON.parse(fs.readFileSync('./db.json', 'UTF-8'));
 
