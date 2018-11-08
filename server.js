@@ -7,13 +7,14 @@ const jwt = require('jsonwebtoken');
 // var app = express();
 
 const server = jsonServer.create();
-const middlewares = jsonServer.defaults();
+
 // Set default middlewares (logger, static, cors and no-cache)
 // server.use(cors());
-server.use(middlewares);
 const router = jsonServer.router('./db.json');
+const middlewares = jsonServer.defaults();
 const userdb = JSON.parse(fs.readFileSync('./db.json', 'UTF-8'));
 
+server.use(middlewares);
 server.use(bodyParser.urlencoded({ extended: true }));
 server.use(bodyParser.json());
 // server.use(jsonServer.defaults());
@@ -91,9 +92,16 @@ let verifyToken = token => {
 };
 
 let isAuthenticated = ({ email, password }) => {
-  return userdb.users.findIndex(
-    user => user.email === email && user.password === password
-  );
+  // console.log('입력 이메일', email);
+  // console.log('입력 비번', password);
+  // console.log('userdb', userdb.users);
+  return userdb.users.findIndex(user => {
+    // return userdb.users.findIndex(user => {
+    // console.log('user', user);
+    // console.log('user.email', user.email);
+    // console.log('user.email', user.password);
+    return user.email === email && user.password === password;
+  });
 };
 
 server.get('/users', (req, res) => {
@@ -219,9 +227,11 @@ server.get('/auth/check', (req, res) => {
   try {
     console.log('auth-check-try', req.headers.authorization.split(' ')[1]);
     decode = verifyToken(req.headers.authorization.split(' ')[1]);
-    let userIndex = userdb.users.findIndex(
-      user => decode.email === user.email && decode.handphone === user.handphone
-    );
+    let userIndex = userdb.users.findIndex(user => {
+      // console.log('user', user);
+      // console.log('user.email', user.email);
+      return decode.email === user.email && decode.handphone === user.handphone;
+    });
 
     let userInfo = userdb.users[userIndex];
     console.log('userInfo', userInfo);
@@ -238,9 +248,12 @@ server.get('/auth/check', (req, res) => {
 server.post('/auth/login', (req, res) => {
   // res.writeHead(200, { 'Access-Control-Allow-Origin': '*' });
   const { email, password } = req.body;
-  // console.log('rq', req.body);
+  console.log('auth/login 시도a', req.body);
+
   let userIndex = isAuthenticated({ email, password });
+  console.log('userIndex', userIndex);
   if (userIndex === -1) {
+    console.log('서버측에서 접속 불가 오류');
     const status = 401;
     const message = 'Incorrect email or password';
     res.status(status).json({ status, message });

@@ -4755,35 +4755,6 @@
       "name": "민재46",
       "handphone": "01-63116-1020",
       "email": "_21@gmail.com"
-    },
-    {
-      "dispatchConfig": null,
-      "_targetInst": null,
-      "_dispatchListeners": null,
-      "_dispatchInstances": null,
-      "nativeEvent": null,
-      "type": null,
-      "target": null,
-      "eventPhase": null,
-      "bubbles": null,
-      "cancelable": null,
-      "defaultPrevented": null,
-      "isTrusted": null,
-      "view": null,
-      "detail": null,
-      "screenX": null,
-      "screenY": null,
-      "clientX": null,
-      "clientY": null,
-      "pageX": null,
-      "pageY": null,
-      "ctrlKey": null,
-      "shiftKey": null,
-      "altKey": null,
-      "metaKey": null,
-      "button": null,
-      "buttons": null,
-      "id": 100
     }
   ]
 }
