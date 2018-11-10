@@ -57,7 +57,8 @@ server.post('/fileupload', upload.array('profile'), function(req, res, next) {
       Bucket: 'mmrq',
       Key: fileObj.originalname,
       ACL: 'public-read',
-      ContentType: fileObj.mimetype
+      ContentType: fileObj.mimetype,
+      limits: { fileSize: 5 * 1024 * 1024 }
     };
 
     var s3obj = new aws.S3({ params: s3_params });
