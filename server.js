@@ -269,7 +269,7 @@ server.post('/auth/login', (req, res) => {
 server.use(
   /^(?!\/auth|\/find|\/witness|\/users|\/fileupload).*$/,
   (req, res, next) => {
-    console.log('설마 여기 또 가나?');
+    // console.log('설마 여기 또 가나?');
     // res.writeHead(200, { 'Access-Control-Allow-Origin': '*' });
     if (
       req.headers.authorization === undefined ||
